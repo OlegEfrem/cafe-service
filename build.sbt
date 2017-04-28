@@ -9,6 +9,11 @@ scalaVersion := "2.12.2"
 
 scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf8")
 
+libraryDependencies ++= Seq(
+  "org.scalactic" %% "scalactic" % "3.0.1",
+  "org.scalatest" %% "scalatest" % "3.0.1" % Test
+)
+
 // run scalastyle at compile time
 lazy val compileScalastyle = taskKey[Unit]("compileScalastyle")
 
