@@ -2,7 +2,7 @@ package com.oef.cafe.model
 
 sealed trait MenuItem {
   def price: Double
-  def isDrink: Boolean = this.isInstanceOf[Food]
+  def isDrink: Boolean = this.isInstanceOf[Drink]
   def isFood: Boolean = this.isInstanceOf[Food]
   def isHot: Boolean = this.isInstanceOf[Hot]
   def isHotFood: Boolean = isFood && isHot

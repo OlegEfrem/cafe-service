@@ -8,7 +8,7 @@ class CafeServiceTest extends WordSpec with Matchers {
 
   "standard bill" should {
 
-    "return 3.5 for input item list: [Cole, Cofee, Cheese Sandwich]" in {
+    "return 3.5 for input item list: [Cole, Coffee, Cheese Sandwich]" in {
       cafeService.standardBillFor(Seq("Cola", "Coffee", "Cheese Sandwich")) shouldBe 3.5
     }
 
@@ -27,28 +27,23 @@ class CafeServiceTest extends WordSpec with Matchers {
   "service charge" should {
 
     "apply no service charge is applied when all purchased items are drinks" in {
-      cafeService.serviceCharge(Seq("Coffe", "Cola")) shouldBe 0
+      cafeService.serviceCharge(Seq("Coffee", "Cola")) shouldBe 0
     }
 
     "apply a service charge of 10% to the total bill, when purchased items include any food" in {
-      cafeService.serviceCharge(Seq("Coffe", "Cola", "Cheese Sandwich")) shouldBe 0.35
+      cafeService.serviceCharge(Seq("Coffee", "Cola", "Cheese Sandwich")) shouldBe 0.35
     }
 
     "apply a service charge of 20%, when purchased items include any hot food" in {
-      cafeService.serviceCharge(Seq("Coffe", "Cola", "Steak Sandwich")) shouldBe 1.2
+      cafeService.serviceCharge(Seq("Coffee", "Cola", "Steak Sandwich")) shouldBe 1.2
     }
 
     "apply a service charge of 20%, when purchased items include any hot food and any cold food" in {
-      cafeService.serviceCharge(Seq("Coffe", "Cola", "Steak Sandwich", "Cheese Sandwich")) shouldBe 1.6
+      cafeService.serviceCharge(Seq("Coffee", "Cola", "Steak Sandwich", "Cheese Sandwich")) shouldBe 1.6
     }
 
     "apply a service charge of maximum 20 pounds " in {
       cafeService.serviceCharge((1 to 30).map(_ => "Steak Sandwich")) shouldBe 20
-    }
-
-    "rounded to 2 decimal places" in {
-      pending
-      //TODO find a test case to test this
     }
 
   }
