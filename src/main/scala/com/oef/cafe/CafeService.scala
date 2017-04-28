@@ -1,15 +1,21 @@
 package com.oef.cafe
 
+import com.oef.cafe.model.MenuItem
+
 trait CafeService {
   type MenuItem = String
   type Price = Double
 
-  def standardBillFor(items: Seq[MenuItem]): Double
+  def standardBillFor(items: Seq[MenuItem]): Price
 
 }
 
-object CafeService {
-  def apply(): CafeService = new CafeService {
-    override def standardBillFor(items: Seq[MenuItem]) = -1
+private class DefaultCafeService extends CafeService {
+  override def standardBillFor(items: Seq[MenuItem]) = {
+    items.map(name => MenuItem(name).price).sum
   }
+}
+
+object CafeService {
+  def apply(): CafeService = new DefaultCafeService
 }
