@@ -1,16 +1,16 @@
 package com.oef.cafe.model
 
-trait Food
+private[model] trait Food
 
-trait Hot
+private[model] trait Hot
 
-trait Cold
+private[model] trait Cold
 
-trait Drink
+private[model] trait Drink
 
 case class ItemNotSupportedException(message: String) extends Exception(message)
 
-sealed trait MenuItem {
+private[cafe] sealed trait MenuItem {
 
   def price: Double
 
@@ -24,7 +24,7 @@ sealed trait MenuItem {
 
 }
 
-object MenuItem {
+private[cafe] object MenuItem {
   def apply(itemName: String): MenuItem = {
     itemName match {
       case "Cola" => Cola()
@@ -36,10 +36,10 @@ object MenuItem {
   }
 }
 
-case class Cola(price: Double = 0.5) extends MenuItem with Drink with Cold
+private[model] case class Cola(price: Double = 0.5) extends MenuItem with Drink with Cold
 
-case class Coffee(price: Double = 1) extends MenuItem with Drink with Hot
+private[model] case class Coffee(price: Double = 1) extends MenuItem with Drink with Hot
 
-case class CheeseSandwich(price: Double = 2) extends MenuItem with Food with Cold
+private[model] case class CheeseSandwich(price: Double = 2) extends MenuItem with Food with Cold
 
-case class SteakSandwich(price: Double = 4.5) extends MenuItem with Food with Hot
+private[model] case class SteakSandwich(price: Double = 4.5) extends MenuItem with Food with Hot
