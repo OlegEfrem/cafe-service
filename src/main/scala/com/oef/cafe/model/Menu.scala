@@ -1,16 +1,5 @@
 package com.oef.cafe.model
 
-sealed trait MenuItem {
-  def price: Double
-  def isDrink: Boolean = this.isInstanceOf[Drink]
-  def isFood: Boolean = this.isInstanceOf[Food]
-  def isHot: Boolean = this.isInstanceOf[Hot]
-  def isHotFood: Boolean = isFood && isHot
-
-}
-
-case class ItemNotSupportedException(message: String) extends Exception(message)
-
 trait Food
 
 trait Hot
@@ -18,6 +7,22 @@ trait Hot
 trait Cold
 
 trait Drink
+
+case class ItemNotSupportedException(message: String) extends Exception(message)
+
+sealed trait MenuItem {
+
+  def price: Double
+
+  def isDrink: Boolean = this.isInstanceOf[Drink]
+
+  def isHotFood: Boolean = isFood && isHot
+
+  def isFood: Boolean = this.isInstanceOf[Food]
+
+  def isHot: Boolean = this.isInstanceOf[Hot]
+
+}
 
 object MenuItem {
   def apply(itemName: String): MenuItem = {
@@ -38,4 +43,3 @@ case class Coffee(price: Double = 1) extends MenuItem with Drink with Hot
 case class CheeseSandwich(price: Double = 2) extends MenuItem with Food with Cold
 
 case class SteakSandwich(price: Double = 4.5) extends MenuItem with Food with Hot
-
